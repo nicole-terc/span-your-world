@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
@@ -102,6 +103,12 @@ class SpanFragment : Fragment() {
                 //underline
                 text.setSpan(UnderlineSpan(),
                         24, 29, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                //click
+                text.setSpan(object : ClickableSpan() {
+                    override fun onClick(widget: View) = activity.toast("Text clicked!")
+                }, 24, 29, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                span_text.movementMethod = LinkMovementMethod.getInstance()
             }
             LEADING_SPAN -> {
                 text = SpannableStringBuilder("In a land far far away, where no androids wanted to go, bla bla bla leading span appeared!")
